@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沖繩之旅 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600&family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #1a6b8a;
+    --ocean-light: #2a8ab0;
+    --ocean-pale: #e8f4f8;
+    --sand: #f5ede0;
+    --sand-dark: #c8a97a;
+    --coral: #e07050;
+    --coral-light: #f0a080;
+    --green: #3a7a5a;
+    --text: #1c1c1c;
+    --text-muted: #6a6a6a;
+    --text-light: #9a9a9a;
+    --white: #fefefe;
+    --border: #e0d8d0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Zen Kaku Gothic New', sans-serif; background: #f8f4ee; color: var(--text); line-height: 1.7; }
+
+  .hero {
+    background: linear-gradient(160deg, #0d4a6b 0%, #1a6b8a 40%, #2a9bb5 75%, #4db8d4 100%);
+    min-height: 320px; padding: 60px 40px 50px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 60px;
+    background: #f8f4ee; clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .hero-wave {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.06;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(255,255,255,0.8) 28px, rgba(255,255,255,0.8) 30px);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
+  .hero-title { font-family: 'Noto Serif TC', serif; font-size: clamp(36px, 7vw, 64px); font-weight: 300; color: #fff; line-height: 1.2; margin-bottom: 6px; }
+  .hero-title span { color: #a8e0f0; font-weight: 600; }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.55); letter-spacing: 1px; margin-bottom: 32px; }
+  .flight-pills { display: flex; gap: 12px; flex-wrap: wrap; }
+  .flight-pill {
+    background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 50px;
+    padding: 8px 18px; font-size: 13px; color: rgba(255,255,255,0.9);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .flight-pill .arrow { color: rgba(255,255,255,0.4); }
+  .flight-pill .highlight { color: #a8e0f0; font-weight: 700; }
+
+  .main { max-width: 800px; margin: 0 auto; padding: 20px 20px 60px; }
+
+  .day-section { margin-bottom: 40px; }
+  .day-label {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .day-num {
+    font-family: 'Noto Serif TC', serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; color: var(--white); background: var(--ocean);
+    padding: 4px 12px; border-radius: 4px;
+  }
+  .day-num.green { background: var(--green); }
+  .day-num.coral { background: var(--coral); }
+  .day-num.gray { background: #7a7a7a; }
+  .day-title-text { font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 400; color: var(--text); }
+  .day-date { font-size: 12px; color: var(--text-light); margin-left: auto; }
+
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 52px; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, var(--ocean-pale), var(--border));
+  }
+  .tl-item { display: flex; gap: 0; margin-bottom: 10px; position: relative; }
+  .tl-time-col { width: 52px; flex-shrink: 0; padding-top: 14px; text-align: right; padding-right: 12px; position: relative; z-index: 1; }
+  .tl-time { font-size: 11px; color: var(--text-light); line-height: 1.3; display: block; }
+  .tl-dot-col { width: 20px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; padding-top: 18px; position: relative; z-index: 1; }
+  .tl-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ocean); border: 2px solid var(--white); box-shadow: 0 0 0 1px var(--ocean); flex-shrink: 0; }
+  .tl-dot.green { background: var(--green); box-shadow: 0 0 0 1px var(--green); }
+  .tl-dot.coral { background: var(--coral); box-shadow: 0 0 0 1px var(--coral); }
+  .tl-dot.sand { background: var(--sand-dark); box-shadow: 0 0 0 1px var(--sand-dark); }
+  .tl-dot.gray { background: #aaa; box-shadow: 0 0 0 1px #aaa; }
+
+  /* Clickable card */
+  a.tl-card {
+    text-decoration: none; color: inherit; display: block;
+    flex: 1; background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px; margin-left: 10px; margin-bottom: 2px;
+    transition: box-shadow 0.2s, transform 0.15s;
+    cursor: pointer;
+  }
+  a.tl-card:hover { box-shadow: 0 4px 16px rgba(26,107,138,0.13); transform: translateY(-1px); }
+  a.tl-card.highlight-card { background: linear-gradient(135deg, #f0f9ff, #e8f6fb); border-color: #b8dff0; }
+  a.tl-card.food-card { background: linear-gradient(135deg, #fff8f3, #fdf0e8); border-color: #f0d8c0; }
+  a.tl-card.arrival-card { background: linear-gradient(135deg, #f0fbf5, #e5f5ec); border-color: #b0dfc0; }
+
+  /* Non-clickable card (no map) */
+  .tl-card {
+    flex: 1; background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px; margin-left: 10px; margin-bottom: 2px;
+  }
+  .tl-card.transport {
+    background: transparent; border-color: transparent; padding: 4px 16px;
+    display: flex; align-items: center; gap: 10px; color: var(--text-light); font-size: 12px;
+  }
+  .tl-card.transport::before { content: '▸'; color: var(--border); font-size: 10px; }
+
+  .map-hint {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 11px; color: var(--ocean); margin-top: 8px; opacity: 0.7;
+  }
+  .map-hint svg { flex-shrink: 0; }
+
+  .card-top { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+  .card-name { font-size: 14px; font-weight: 700; color: var(--text); flex: 1; min-width: 0; }
+  .card-duration { font-size: 11px; color: var(--text-light); background: #f0ece8; padding: 2px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+  .card-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.7; }
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .tag { font-size: 11px; padding: 2px 9px; border-radius: 20px; font-weight: 400; }
+  .tag-tour { background: #deeef8; color: #1a6b8a; }
+  .tag-food { background: #fce8d8; color: #c05030; }
+  .tag-tip { background: #e8f5ec; color: #2a6a40; }
+  .tag-note { background: #f5f0e8; color: #8a6a30; }
+
+  .tip-box {
+    background: #fffbf0; border: 1px solid #f0e0a0; border-left: 3px solid var(--sand-dark);
+    border-radius: 8px; padding: 12px 14px; font-size: 12px; color: #7a6030; margin-top: 8px; line-height: 1.7;
+  }
+  .tip-box strong { color: #5a4020; }
+
+  .free-night {
+    background: linear-gradient(135deg, #1a3a2a, #2a5a3a); border-radius: 10px;
+    padding: 16px 18px; margin: 10px 0 10px 82px;
+    color: rgba(255,255,255,0.85); font-size: 13px; line-height: 1.7; position: relative;
+  }
+  .free-night-title { font-family: 'Noto Serif TC', serif; font-size: 14px; color: #a0d4b0; margin-bottom: 4px; font-weight: 600; }
+
+  .section-note {
+    background: #fff8f0; border: 1px solid #f0d8b0; border-radius: 8px;
+    padding: 12px 16px; margin-top: 12px; font-size: 12px; color: #7a5030; line-height: 1.7;
+  }
+
+  .footer { text-align: center; padding: 40px 20px; font-size: 12px; color: var(--text-light); border-top: 1px solid var(--border); margin-top: 20px; }
+  .footer-title { font-family: 'Noto Serif TC', serif; font-size: 20px; color: var(--ocean); margin-bottom: 8px; font-weight: 300; }
+
+  @media (max-width: 500px) {
+    .hero { padding: 40px 20px 44px; }
+    .flight-pills { flex-direction: column; }
+    .tl-time-col { width: 40px; }
+    .timeline::before { left: 40px; }
+    .free-night { margin-left: 62px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-wave"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Travel Itinerary · 2026</div>
+    <div class="hero-title">沖繩<span>那霸</span></div>
+    <div class="hero-sub">MM924 / MM921 · 5月31日 — 6月3日</div>
+    <div class="flight-pills">
+      <div class="flight-pill"><span class="highlight">TPE</span><span class="arrow">→</span><span class="highlight">OKA</span><span>5/31 &nbsp;14:50 → 17:35</span></div>
+      <div class="flight-pill"><span class="highlight">OKA</span><span class="arrow">→</span><span class="highlight">TPE</span><span>6/3 &nbsp;&nbsp;08:10 → 08:45</span></div>
+      <div class="flight-pill">🏠 月桃民宿 · 松尾，那霸</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- DAY 1 -->
+  <div class="day-section">
+    <div class="day-label">
+      <span class="day-num">DAY 1</span>
+      <span class="day-title-text">抵達那霸</span>
+      <span class="day-date">5/31（日）</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">14:50</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-card">
+          <div class="card-top"><div class="card-name">桃園機場出發</div></div>
+          <div class="card-desc">MM924，A320neo。航廈 1。</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">17:35</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-card arrival-card">
+          <div class="card-top"><div class="card-name">抵達那霸空港</div></div>
+          <div class="card-desc">過海關後搭沖繩單軌電車（ゆいレール），牧志站或縣廳前站下車，步行至月桃民宿，約 30–40 分鐘。</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">18:30</span></div>
+        <div class="tl-dot-col"><div class="tl-dot green"></div></div>
+        <a class="tl-card" href="https://www.google.com/maps/place/?q=place_id:ChIJe4MFZnZp5TQR9jL1dm4M5Iw" target="_blank">
+          <div class="card-top"><div class="card-name">入住月桃民宿</div></div>
+          <div class="card-desc">Matsuo 1-16-24，那霸市松尾。距國際通步行約 5 分鐘，距縣廳前也很近，明後天出發都非常方便。</div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">19:30</span></div>
+        <div class="tl-dot-col"><div class="tl-dot coral"></div></div>
+        <div class="tl-card food-card">
+          <div class="card-top"><div class="card-name">晚餐：國際通 · 牧志周邊</div></div>
+          <div class="card-desc">輕鬆逛一逛，找一間看順眼的居酒屋或海鮮食堂。推薦試試沖繩麵、海葡萄、島豆腐，配一杯 ORION 啤酒，感受一下到了的感覺。</div>
+          <div class="card-tags"><span class="tag tag-food">🍺 居酒屋</span><span class="tag tag-tip">步行 5 分鐘</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">21:30</span></div>
+        <div class="tl-dot-col"><div class="tl-dot gray"></div></div>
+        <div class="tl-card">
+          <div class="card-top"><div class="card-name">回民宿休息</div></div>
+          <div class="card-desc">明天 07:50 縣廳前要集合，早點睡。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-section">
+    <div class="day-label">
+      <span class="day-num">DAY 2</span>
+      <span class="day-title-text">南部一日遊</span>
+      <span class="day-date">6/1（一）</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">07:50</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-card highlight-card">
+          <div class="card-top"><div class="card-name">縣廳前觀光巴士集合</div><span class="card-duration">08:00 準時出發</span></div>
+          <div class="card-desc">從民宿步行約 5 分鐘即達。請提前 10 分鐘到場，遲到不退款。</div>
+          <div class="card-tags"><span class="tag tag-tour">✈ 已訂導覽</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">08:50</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <a class="tl-card" href="https://www.google.com/maps/place/?q=place_id:ChIJGRP4dcBx5TQR2fy_PziIymI" target="_blank">
+          <div class="card-top"><div class="card-name">知念岬公園</div><span class="card-duration">40 分鐘</span></div>
+          <div class="card-desc">沖繩東南部的岬角，三面環太平洋，海天一色。清晨光線打在海面上特別美，是觀賞沖繩第一道曙光的著名景點。</div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"></div>
+        <div class="tl-dot-col"></div>
+        <div class="tl-card transport">巴士 20 分鐘</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">09:50</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <a class="tl-card" href="https://www.google.com/maps/place/?q=place_id:ChIJVXBnnepv5TQRdDAwNwK8kVg" target="_blank">
+          <div class="card-top"><div class="card-name">新原海灘</div><span class="card-duration">50 分鐘</span></div>
+          <div class="card-desc">沖繩南部著名海灘，淺水區清澈透明，可搭乘玻璃船欣賞珊瑚礁與熱帶魚，每 20 分鐘一班。</div>
+          <div class="tip-box">💡 <strong>建議</strong>：抵達後馬上去排玻璃船，否則很容易等不到。</div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"></div>
+        <div class="tl-dot-col"></div>
+        <div class="tl-card transport">巴士 20 分鐘</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">11:00</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <a class="tl-card" href="https://www.google.com/maps/place/?q=place_id:ChIJa3ifUYVp5TQR3QZD1tyLml4" target="_blank">
+          <div class="card-top"><div class="card-name">沖繩世界 · 玉泉洞</div><span class="card-duration">2.5 小時</span></div>
+          <div class="card-desc">日本第二長鐘乳洞，全長 5,000 公尺，由珊瑚礁歷經 30 萬年形成，現開放 890 公尺。內部恆溫涼爽，鐘乳石造型壯觀。</div>
+          <div class="tip-box">💡 <strong>12:30</strong> 有「EISA」沖繩傳統舞蹈表演，約 25 分鐘，非常值得安排。</div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"></div>
+        <div class="tl-dot-col"></div>
+        <div class="tl-card transport">巴士 30 分鐘</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">14:00</span></div>
+        <div class="tl-dot-col"><div class="tl-dot coral"></div></div>
+        <a class="tl-card food-card" href="https://www.google.com/maps/place/?q=place_id:ChIJ___vF8Jn5TQRjIKg7qrBKQU" target="_blank">
+          <div class="card-top"><div class="card-name">糸満漁市場（道之驛糸滿）</div><span class="card-duration">1 小時</span></div>
+          <div class="card-desc">日本最南端公路休息站，聚集物產中心與糸満漁市場，可品嘗新鮮現撈海鮮，種類豐富、價格實惠。</div>
+          <div class="card-tags"><span class="tag tag-food">🐟 新鮮海鮮</span></div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"></div>
+        <div class="tl-dot-col"></div>
+        <div class="tl-card transport">巴士 10 分鐘</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">15:10</span></div>
+        <div class="tl-dot-col"><div class="tl-dot sand"></div></div>
+        <a class="tl-card" href="https://www.google.com/maps/place/?q=place_id:ChIJ98yehgto5TQRJj4hYbNQH9U" target="_blank">
+          <div class="card-top"><div class="card-name">沖繩奧特萊斯 Ashibinaa（轉運）</div></div>
+          <div class="card-desc">建議選<strong>方案二</strong>：繼續前往瀨長島，回程再來 Outlet 就地解散，時間比較充裕。</div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"></div>
+        <div class="tl-dot-col"></div>
+        <div class="tl-card transport">巴士 15 分鐘</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">15:25</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <a class="tl-card highlight-card" href="https://www.google.com/maps/place/?q=place_id:ChIJTXE7iR5o5TQRuIMt_jUINqU" target="_blank">
+          <div class="card-top"><div class="card-name">瀨長島 Umikaji Terrace</div><span class="card-duration">1 小時 15 分鐘</span></div>
+          <div class="card-desc">白色地中海風格商業區依山坡層疊而建，可俯瞰那霸機場跑道與大海。飛機起降時景色震撼，下午光線絕佳，是整趟最上相的地點之一。</div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"></div>
+        <div class="tl-dot-col"></div>
+        <div class="tl-card transport">巴士 20 分鐘</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">17:00</span></div>
+        <div class="tl-dot-col"><div class="tl-dot sand"></div></div>
+        <a class="tl-card" href="https://www.google.com/maps/place/?q=place_id:ChIJ98yehgto5TQRJj4hYbNQH9U" target="_blank">
+          <div class="card-top"><div class="card-name">沖繩奧特萊斯 Ashibinaa（購物）</div><span class="card-duration">自由活動</span></div>
+          <div class="card-desc">選方案二者在此就地解散，需自行返回那霸市區（計程車或公車，約 20–30 分鐘）。</div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">17:30</span></div>
+        <div class="tl-dot-col"><div class="tl-dot gray"></div></div>
+        <div class="tl-card transport">縣廳前回程（選方案一者）</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">18:00</span></div>
+        <div class="tl-dot-col"><div class="tl-dot coral"></div></div>
+        <div class="tl-card food-card">
+          <div class="card-top"><div class="card-name">晚餐：國際通居酒屋</div></div>
+          <div class="card-desc">推薦「うりずん」老牌居酒屋，或牧志公設市場二樓帶食材加工。不吃豬腳直接點海鮮拼盤加泡盛，很對。</div>
+          <div class="card-tags"><span class="tag tag-food">🍶 在地料理</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-section">
+    <div class="day-label">
+      <span class="day-num">DAY 3</span>
+      <span class="day-title-text">中部一日遊</span>
+      <span class="day-date">6/2（二）</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">08:10</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <a class="tl-card highlight-card" href="https://www.google.com/maps/place/?q=place_id:ChIJAU9dv51p5TQRWYATbmY1_Gg" target="_blank">
+          <div class="card-top"><div class="card-name">Blue Seal Palette Kumoji 集合</div><span class="card-duration">08:20 出發</span></div>
+          <div class="card-desc">久茂地店前，找拿 Easygo 旗子或穿背心的導遊報名即可。提前 10 分鐘到。</div>
+          <div class="card-tags"><span class="tag tag-tour">✈ 已訂導覽</span></div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">09:05</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <a class="tl-card" href="https://www.google.com/maps/place/?q=place_id:ChIJj1oZ4oQR5TQRhEosxEhG2Ec" target="_blank">
+          <div class="card-top"><div class="card-name">道之驛嘉手納</div><span class="card-duration">30 分鐘</span></div>
+          <div class="card-desc">緊鄰全亞洲最大的美軍空軍基地，從四樓展望台可俯瞰整個基地跑道，偶爾能看到軍機起降。館內有美軍相關伴手禮與當地特產。</div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"></div>
+        <div class="tl-dot-col"></div>
+        <div class="tl-card transport">巴士約 20 分鐘</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">09:50</span></div>
+        <div class="tl-dot-col"><div class="tl-dot green"></div></div>
+        <a class="tl-card" href="https://www.google.com/maps/place/?q=place_id:ChIJ12iS29gR5TQRCznHnqmdqpc" target="_blank">
+          <div class="card-top"><div class="card-name">東南植物樂園</div><span class="card-duration">1 小時 10 分鐘</span></div>
+          <div class="card-desc">分「水上樂園」與「植物園」兩區，擁有亞熱帶植物生態，可與動物互動、體驗釣魚，以及沖繩石獅子著色 DIY。整體氛圍悠閒，適合慢慢走。</div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">11:35</span></div>
+        <div class="tl-dot-col"><div class="tl-dot coral"></div></div>
+        <div class="tl-card food-card">
+          <div class="card-top"><div class="card-name">午餐：星野度假村 OLU Grill</div><span class="card-duration">1 小時 20 分鐘</span></div>
+          <div class="card-desc">星野集團旗下海景餐廳，視野極佳，已含在票價內。13 歲以上提供牛肉漢堡＋飲料一杯（可換豬肉）。坐久一點享受海景也沒問題。</div>
+          <div class="card-tags"><span class="tag tag-food">🍔 含在票價內</span><span class="tag tag-tip">海景餐廳</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"></div>
+        <div class="tl-dot-col"></div>
+        <div class="tl-card transport">巴士約 30 分鐘</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">13:10</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <a class="tl-card" href="https://www.google.com/maps/place/?q=place_id:ChIJ71RebUgX5TQRInS09WnHs8Q" target="_blank">
+          <div class="card-top"><div class="card-name">殘波岬</div><span class="card-duration">30 分鐘</span></div>
+          <div class="card-desc">沖繩本島最西端，以高聳白色燈塔與壯麗玄武岩斷崖聞名。下午光線從西面射入，是整趟行程攝影效果最好的地點之一。</div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"></div>
+        <div class="tl-dot-col"></div>
+        <div class="tl-card transport">巴士約 45 分鐘</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">14:20</span></div>
+        <div class="tl-dot-col"><div class="tl-dot sand"></div></div>
+        <a class="tl-card" href="https://www.google.com/maps/place/?q=place_id:ChIJJ_TSFGIS5TQRa_HkdjGALss" target="_blank">
+          <div class="card-top"><div class="card-name">AEON MALL 永旺夢樂城沖繩來客夢</div><span class="card-duration">2 小時 30 分鐘</span></div>
+          <div class="card-desc">超過 200 家店鋪＋60 家餐廳。含服飾、化妝品、沖繩限定特產、美食街與超市。每位旅客贈送 Blue Seal 冰淇淋一杯，記得兌換。地下超市適合掃伴手禮，比觀光區便宜很多。</div>
+          <div class="card-tags"><span class="tag tag-note">🍦 贈冰淇淋一杯</span></div>
+          <div class="map-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>在 Google Maps 查看</div>
+        </a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">18:00</span></div>
+        <div class="tl-dot-col"><div class="tl-dot gray"></div></div>
+        <div class="tl-card transport">那霸縣廳前回程</div>
+      </div>
+
+    </div>
+
+    <div class="free-night">
+      <div class="free-night-title">✦ 自由之夜</div>
+      這是整趟旅程最完整的自由夜晚。推薦去<strong>榮町市場</strong>或<strong>那霸新天地</strong>周邊，比國際通少一點觀光感，多一點在地生活味。找一間小居酒屋慢慢坐，喝杯泡盛，把這幾天的感受好好沉澱一下。
+      <br><br>
+      ⚠️ <strong>記得今晚把行李整理好</strong>，明天早上直接前往機場，不會再回來民宿。
+    </div>
+
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-section">
+    <div class="day-label">
+      <span class="day-num gray">DAY 4</span>
+      <span class="day-title-text">回程</span>
+      <span class="day-date">6/3（三）</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">06:30</span></div>
+        <div class="tl-dot-col"><div class="tl-dot gray"></div></div>
+        <div class="tl-card">
+          <div class="card-top"><div class="card-name">退房離開</div></div>
+          <div class="card-desc">退房時間為 10:00 前，但建議提早出門。帶行李直接前往那霸空港，搭沖繩單軌電車約 15 分鐘。</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">07:00</span></div>
+        <div class="tl-dot-col"><div class="tl-dot coral"></div></div>
+        <div class="tl-card food-card">
+          <div class="card-top"><div class="card-name">機場早餐：A&amp;W</div></div>
+          <div class="card-desc">那霸機場內有 A&amp;W，台灣已經沒有這個連鎖，吃個道地沖繩漢堡當這趟旅程的最後一餐，很有儀式感。</div>
+          <div class="card-tags"><span class="tag tag-food">🍔 沖繩限定</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time-col"><span class="tl-time">08:10</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-card highlight-card">
+          <div class="card-top"><div class="card-name">MM921 那霸起飛</div></div>
+          <div class="card-desc">A320neo。08:45 抵達桃園機場。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-note">
+      📋 備忘：6/3 退房時間是 10:00 前，但班機 8:10 起飛，前一晚務必整理好行李，當天早上直接出門。
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-title">沖繩 · 那霸</div>
+  2026 年 5 月 31 日 — 6 月 3 日 &nbsp;·&nbsp; MM924 / MM921 &nbsp;·&nbsp; 月桃民宿
+</div>
+
+</body>
+</html>
